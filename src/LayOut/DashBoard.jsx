@@ -13,7 +13,7 @@ const SidebarItem = ({ to, icon: Icon, label }) => (
       to={to}
       className={({ isActive }) =>
         isActive
-          ? 'text-primary font-bold flex items-center gap-2 p-2 rounded bg-gray-100'
+          ? 'text-primary font-bold flex items-center gap-2 p-2 rounded '
           : 'flex items-center gap-2 p-2 rounded hover:bg-gray-200'
       }
     >
@@ -99,7 +99,7 @@ const DashBoard = () => {
 
         {/* Sidebar */}
         <div
-          className={`lg:w-1/4 w-64 bg-base-200 p-4 h-full fixed lg:static z-40 transform ${
+          className={`lg:w-1/6 w-64 bg-base-200 p-4 h-full fixed lg:static z-40 transform ${
             isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
           } lg:translate-x-0 transition-transform duration-300 ease-in-out`}
         >
@@ -107,7 +107,7 @@ const DashBoard = () => {
             {/* Role অনুযায়ী Sidebar Item দেখানো */}
             {role === 'admin' && (
               <>
-                <SidebarItem to="/dashboard/manageUsers" icon={FaHome} label="Statistics" />
+                <SidebarItem to="/dashboard/statistics" icon={FaHome} label="Statistics" />
                 <SidebarItem to="/dashboard/manageUsers" icon={FaHome} label="Manage Users" />
              
               </>
@@ -116,6 +116,8 @@ const DashBoard = () => {
             {role === 'seller' && (
               <>
                 <SidebarItem to="/dashboard/addItem" icon={FaClipboardList} label="Add Item" />
+                <SidebarItem to="/dashboard/my-inventory" icon={FaClipboardList} label="My Inventory" />
+                <SidebarItem to="/dashboard/mangeOrder" icon={FaClipboardList} label="Manage Orders" />
                
               </>
             )}

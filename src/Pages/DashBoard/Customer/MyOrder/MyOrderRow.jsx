@@ -3,7 +3,7 @@ import Swal from "sweetalert2";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 
 const MyOrderRow = ({ order, refetch, setDeletedCount }) => {
-    const { name, image, price, size, quantity, status, _id,panjabiId } = order;
+    const { name, image, price, size, quantity, status, _id, panjabiId } = order;
     const axiosSecure = useAxiosSecure();
 
     const handleCancelOrder = async () => {
@@ -19,12 +19,12 @@ const MyOrderRow = ({ order, refetch, setDeletedCount }) => {
             if (result.isConfirmed) {
                 try {
                     const response = await axiosSecure.delete(`/purchases/${_id}`);
-                    await axiosSecure.patch(`/panjabi/quantity/${panjabiId}`, { quantityToUpdate: quantity,status:'increase'});
+                    await axiosSecure.patch(`/panjabi/quantity/${panjabiId}`, { quantityToUpdate: quantity, status: 'increase' });
                     if (response.data.deletedCount) {
                         Swal.fire("Cancelled!", "Your order has been cancelled.", "success");
 
                         // Increment deleted count
-                        setDeletedCount((prevCount) => prevCount + 1); 
+                        setDeletedCount((prevCount) => prevCount + 1);
 
                         // Refetch data to update the table
                         refetch();
@@ -45,11 +45,11 @@ const MyOrderRow = ({ order, refetch, setDeletedCount }) => {
             <td className="p-4">{size}</td>
             <td className="p-4">{quantity}</td>
             <td className="p-4 font-semibold">${price}</td>
-            <td className={`p-4 font-bold ${status === "pending" ? "text-yellow-500" : "text-green-600"}`}>
+            <td className={`p-4 font-bold ${status === "pending" || status === "Processing" ? "text-yellow-500" : "text-green-600"}`}>
                 {status}
             </td>
             <td className="p-4">
-                {status === "pending" ? (
+                {(status === "pending" || status === "Processing") ? (
                     <button onClick={handleCancelOrder} className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700">
                         Cancel
                     </button>

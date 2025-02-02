@@ -13,6 +13,10 @@ import ManageUsers from "../Pages/DashBoard/Admin/ManageUsers/ManageUsers";
 import PrivateRoute from "./PrivateRoute";
 import SellerRoute from "./SellerRoute";
 import AdminRoute from "./AdminRoute";
+import MyInventory from "../Pages/DashBoard/Seller/My-Inventory/MyInventory";
+import UpdatePanjabi from "../Pages/DashBoard/Seller/My-Inventory/UpdatePanjabi";
+import ManageOrder from "../Pages/DashBoard/Seller/MangeOrder/ManageOrder";
+import Statistics from "../Pages/DashBoard/Admin/Statistics/Statistics";
 
 
 export const router = createBrowserRouter([
@@ -45,6 +49,10 @@ export const router = createBrowserRouter([
 
             // Admin------------------------------------->
             {
+                path: 'statistics',
+                element: <PrivateRoute><AdminRoute><Statistics></Statistics></AdminRoute></PrivateRoute>
+            },
+            {
                 path: 'manageUsers',
                 element: <PrivateRoute><AdminRoute><ManageUsers></ManageUsers></AdminRoute></PrivateRoute>
             },
@@ -57,6 +65,18 @@ export const router = createBrowserRouter([
                 path: 'addItem',
                 element: <PrivateRoute><SellerRoute><AddItem></AddItem></SellerRoute></PrivateRoute>
             },
+            {
+                path: 'my-inventory',
+                element: <PrivateRoute><SellerRoute><MyInventory></MyInventory></SellerRoute></PrivateRoute>
+            },
+            {
+                path: 'update-panjabi/:id',
+                element: <PrivateRoute><SellerRoute><UpdatePanjabi></UpdatePanjabi></SellerRoute></PrivateRoute>
+            },
+            {
+            path:'mangeOrder',
+            element:<ManageOrder></ManageOrder>
+            },
 
 
 
@@ -64,7 +84,7 @@ export const router = createBrowserRouter([
             // Customer-------------------------->
             {
                 path: 'myOrders',
-                element:<PrivateRoute> <MyOrder></MyOrder></PrivateRoute>
+                element: <PrivateRoute> <MyOrder></MyOrder></PrivateRoute>
             }
         ]
     }
